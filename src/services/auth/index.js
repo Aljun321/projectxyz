@@ -35,11 +35,10 @@ export default {
     interval: null,
     speed: 1000
   },
-<<<<<<< HEAD
   messengerSupport: {
-=======
+    flag: null
+  },
   messenger: {
->>>>>>> acd3c8961163e695a8ad07eecaad743cb28630d1
     flag: null
   },
   notifTimer: {
@@ -207,12 +206,9 @@ export default {
     vue.APIRequest('authenticate/invalidate')
     this.clearMessenger()
     this.clearNotifTimer()
-<<<<<<< HEAD
     this.clearMessengerSuuport()
     ROUTER.push('/')
-=======
     this.tokenData.token = null
->>>>>>> acd3c8961163e695a8ad07eecaad743cb28630d1
     ROUTER.go('/')
   },
   retrieveNotifications(accountId){

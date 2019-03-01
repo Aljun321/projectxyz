@@ -456,10 +456,7 @@ Route::post('/messenger_groups/create', "MessengerGroupController@create");
 Route::post('/messenger_groups/create_new_issue', "MessengerGroupController@createNewIssue");
 Route::post('/messenger_groups/retrieve', "MessengerGroupController@retrieve");
 Route::post('/messenger_groups/retrieve_summary', "MessengerGroupController@retrieveSummary");
-<<<<<<< HEAD
 Route::post('/messenger_groups/retrieve_my_issue', "MessengerGroupController@retrieveMyIssue");
-=======
->>>>>>> acd3c8961163e695a8ad07eecaad743cb28630d1
 Route::post('/messenger_groups/update', "MessengerGroupController@update");
 Route::post('/messenger_groups/delete', "MessengerGroupController@delete");
 Route::get('/messenger_groups/test', 'MessengerGroupController@test');
