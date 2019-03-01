@@ -57,6 +57,10 @@ export default {
     tokenTimer: false,
     verifyingToken: false
   },
+  otpDataHolder: {
+    userInfo: null,
+    data: null
+  },
   currentPath: false,
   setUser(userID, username, type, status, profile, schools, semesters, schoolSemesters, activeSemester, organization, course){
     if(userID === null){
@@ -116,24 +120,9 @@ export default {
           }]
         }
         vue.APIRequest('accounts/retrieve', parameter).then(response => {
-          let profile = response.data[0].account_profile
-          let schools = response.data[0].schools
-          let semesters = response.data[0].my_semesters
-          let schoolSemesters = response.data[0].school_semesters
-          let activeSemester = response.data[0].active_semester_details
-          let organization = response.data[0].active_organization
-          let course = response.data[0].active_course
-          this.setUser(userInfo.id, userInfo.username, userInfo.account_type, userInfo.status, profile, schools, semesters, schoolSemesters, activeSemester, organization, course)
-          if(response.data[0].account_information === null || response.data[0].account_degree === null){
-            ROUTER.push('account_settings')
-          }else{
-            ROUTER.push('/discussions')
-            // if(userInfo.account_type === 'STUDENT'){
-            //   ROUTER.push('/guide/fs')
-            // }else{
-            //   ROUTER.push('/guide/ft')
-            // }
-          }
+          this.otpDataHolder.userInfo = userInfo
+          this.otpDataHolder.data = response.data
+          this.checkOtp(response.data[0].notification_settings)
         })
         this.retrieveNotifications(userInfo.id)
         this.retrieveMessages(userInfo.id, userInfo.account_type)
@@ -170,7 +159,8 @@ export default {
           let activeSemester = response.data[0].active_semester_details
           let organization = response.data[0].active_organization
           let course = response.data[0].active_course
-          this.setUser(userInfo.id, userInfo.username, userInfo.account_type, userInfo.status, profile, schools, semesters, schoolSemesters, activeSemester, organization, course)
+          let notifSetting = response.data[0].notification_settings
+          this.setUser(userInfo.id, userInfo.username, userInfo.account_type, userInfo.status, profile, schools, semesters, schoolSemesters, activeSemester, organization, course, notifSetting)
         }).done(response => {
           this.tokenData.verifyingToken = false
           let location = window.location.href
@@ -315,5 +305,46 @@ export default {
     // if(this.user.plan.title === 'Expired' && this.user.type !== 'ADMIN'){
     //   ROUTER.push('/plan')
     // }
+  },
+  validateEmail(email){
+    let reg = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    if(reg.test(email) === false){
+      return false
+    }else{
+      return true
+    }
+  },
+  checkOtp(setting){
+    if(setting !== null){
+      if(parseInt(setting.email_otp) === 1 || parseInt(setting.sms_otp) === 1){
+        // ask otp code here
+        $('#otpModal').modal({
+          backdrop: 'static',
+          keyboard: true,
+          show: true
+        })
+      }else{
+        this.proceedToLogin()
+      }
+    }else{
+      this.proceedToLogin()
+    }
+  },
+  proceedToLogin(){
+    let userInfo = this.otpDataHolder.userInfo
+    let data = this.otpDataHolder.data
+    let profile = data[0].account_profile
+    let schools = data[0].schools
+    let semesters = data[0].my_semesters
+    let schoolSemesters = data[0].school_semesters
+    let activeSemester = data[0].active_semester_details
+    let organization = data[0].active_organization
+    let course = data[0].active_course
+    this.setUser(userInfo.id, userInfo.username, userInfo.account_type, userInfo.status, profile, schools, semesters, schoolSemesters, activeSemester, organization, course)
+    if(data[0].account_information === null || data[0].account_degree === null){
+      ROUTER.push('/profile')
+    }else{
+      ROUTER.push('/discussions')
+    }
   }
 }

@@ -2,7 +2,7 @@
   <div>
     <div class="system-header">
       <a class="navbar-brand" v-on:click="redirect('dashboard')">
-        <img src="../../assets/img/classworx_white.png" class="logo-brand">
+        <img src="../../assets/img/logo_white.png" class="logo-brand">
         <label class="navbar-brand hide-on-mobile"><b>Class</b>Worx</label>
       </a>
     </div>
@@ -69,15 +69,15 @@
                 <span class="dropdown-item dropdown-item-menu-title">
                   <label>Documents</label>
                 </span>
-                <span class="dropdown-item" v-on:click="redirectGuide()">
+                <span class="dropdown-item" @click="openModal('#guideModal')">
                   <i class="far fa-question-circle"></i>
                   <label>Guide</label>
                 </span>
-                <span class="dropdown-item" v-on:click="redirect('/privacy_policy')">
+                <span class="dropdown-item" @click="openModal('#privacyModal')">
                   <i class="fas fa-shield-alt"></i>
                   <label>Privacy Policy</label>
                 </span>            
-                <span class="dropdown-item" v-on:click="redirect('/terms_and_conditions')">
+                <span class="dropdown-item" @click="openModal('#termsAndConditionsModal')">
                   <i class="fa fa-handshake-o"></i>
                   <label>Terms and Conditions</label>
                 </span>
@@ -297,6 +297,9 @@ export default {
       }else if(this.user.type === 'TEACHER'){
         this.redirect('/guide/ft')
       }
+    },
+    openModal(id){
+      $(id).modal('show')
     }
   }
 }

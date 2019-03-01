@@ -24,7 +24,7 @@
             </div>
             <div class="input-group login-spacer">
               <span class="input-group-addon" id="addon-1"><i class="fa fa-envelope"></i></span>
-              <input type="text" class="form-control form-control-login" placeholder="Email" aria-describedby="addon-1" v-model="email">
+              <input type="text" class="form-control form-control-login" placeholder="Email" aria-describedby="addon-1" v-model="email" disabled>
             </div>
             <div class="input-group login-spacer">
               <span class="input-group-addon" id="addon-2"><i class="fa fa-key"></i></span>

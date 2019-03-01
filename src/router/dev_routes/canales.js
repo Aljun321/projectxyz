@@ -300,19 +300,27 @@ export default{
     }
   },
   {
-    path: '/thankyou/:orderNumber',
-    name: 'thankyou',
-    component: resolve => require(['modules/checkout/ThankYou.vue'], resolve),
-    meta: {
-      tokenRequired: true
-    }
-  },
-  {
     path: '/profile/:parameter?',
     name: 'profile',
     component: resolve => require(['modules/account/Update.vue'], resolve),
     meta: {
       tokenRequired: true
+    }
+  },
+  {
+    path: '/referrals',
+    name: 'referrals',
+    component: resolve => require(['modules/referral/Referrals.vue'], resolve),
+    meta: {
+      tokenRequired: true
+    }
+  },
+  {
+    path: '/refer_register/:email/:code',
+    name: 'referRegister',
+    component: resolve => require(['modules/home/referral.vue'], resolve),
+    meta: {
+      tokenRequired: false
     }
   }
   ]

@@ -3,7 +3,7 @@
     <div class="header-section">
       <span class="logo">
         <a class="navbar-brand" v-on:click="redirect('/')">
-          <img src="../../../assets/img/classworx.png" style="margin-bottom: 5px;">
+          <img src="../../../assets/img/logo_white.png" style="margin-bottom: 5px;">
           <label>CLASSWORX</label>
         </a>
       </span>

@@ -50,6 +50,23 @@ Route::get('storage/logo/{filename}', function ($filename)
     return $response;
 });
 
+Route::get('storage/image/{filename}', function ($filename)
+{
+    $path = storage_path('/app/image/' . $filename);
+
+    if (!File::exists($path)) {
+        abort(404);
+    }
+
+    $file = File::get($path);
+    $type = File::mimeType($path);
+
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+
+    return $response;
+});
+
 Route::get('storage/event_feautured_image/{filename}', function ($filename)
 {
     $path = storage_path('/app/eventFeaturedImages/' . $filename);
@@ -310,12 +327,14 @@ Route::post('/attendance_accounts/update', "AttendanceAccountController@update")
 Route::post('/attendance_accounts/delete', "AttendanceAccountController@delete");
 Route::get('/attendance_accounts/test', 'AttendanceAccountController@test');
 
-//Notification Settings
+
+//Notification Settings Controller
 Route::post('/notification_settings/create', "NotificationSettingController@create");
 Route::post('/notification_settings/retrieve', "NotificationSettingController@retrieve");
 Route::post('/notification_settings/update', "NotificationSettingController@update");
 Route::post('/notification_settings/delete', "NotificationSettingController@delete");
 Route::get('/notification_settings/test', 'NotificationSettingController@test');
+
 
 //Reports
 Route::post('/reports/retrieve', "ReportController@retrieve");
@@ -613,7 +632,7 @@ Route::get('/coupons/test', 'CouponController@test');
 //Wishlists Controller
 Route::post('/wishlists/create', "WishlistController@create");
 Route::post('/wishlists/retrieve', "WishlistController@retrieve");
-Route::post('/emails/update', "WishlistController@update");
+Route::post('/wishlists/update', "WishlistController@update");
 Route::post('/wishlists/delete', "WishlistController@delete");
 Route::get('/wishlists/test', 'WishlistController@test');
 
@@ -648,3 +667,14 @@ Route::get('/checkout_items/test', 'CheckoutItemController@test');
 //Orders
 Route::post('/orders/retrieve_orders', "CheckoutController@retrieveOrders");
 Route::post('/orders/retrieve_order_items', "CheckoutController@retrieveOrderItems");
+
+//Emails Controller
+Route::post('/emails/create', "EmailController@create");
+Route::post('/emails/retrieve', "EmailController@retrieve");
+Route::post('/emails/update', "EmailController@update");
+Route::post('/emails/delete', "EmailController@delete");
+Route::post('/emails/reset_password', 'EmailController@resetPassword');
+Route::post('/emails/verification', 'EmailController@verification');
+Route::post('/emails/changed_password', 'EmailController@changedPassword');
+Route::post('/emails/referral', 'EmailController@referral');
+Route::post('/emails/trial', 'EmailController@trial');

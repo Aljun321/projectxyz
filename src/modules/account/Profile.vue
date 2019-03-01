@@ -57,6 +57,12 @@
         </button>
       </span>
     </span>
+    <span class="header">Education Background <i class="fa fa-plus pull-right" style="line-height: 50px; padding-right: 20px;"></i></span>
+    <span class="content">
+    </span>
+    <span class="header">Work Experiences <i class="fa fa-plus pull-right" style="line-height: 50px; padding-right: 20px;"></i></span>
+    <span class="content" style="margin-bottom: 100px;">
+    </span>
   </div>
 </template>
 <style scoped>

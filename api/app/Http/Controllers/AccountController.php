@@ -59,16 +59,6 @@ class AccountController extends ClassWorxController
         // $accountSchool = new AccountSchool();
         // $accountSChoolResult = $accountSchool->insert($dataSchoolAccount);
         $emailFlag = ($request['config']['IS_DEV'] == true) ? 'OFF' : 'ON';
-        $notifData = array(
-          'account_id'  => $this->response['data'],
-          'email'       => 'OFF',
-          'sms'         => 'OFF',
-          'fb_messenger'=> 'OFF',
-          'otp'         => 'OFF',
-          'created_at'  => Carbon::now()
-        );
-        $notifModel = new NotificationSetting();
-        $notifResult = $notifModel->insert($notifData);
         $this->insertNotifications($this->response['data']);
         if($request['account_type'] == 'STUDENT'){
           $this->addTestCourse($this->response['data']);
@@ -232,12 +222,18 @@ class AccountController extends ClassWorxController
           $result[$i]['my_semesters'] = $this->getSemesters($result[$i]['id']);
           $result[$i]['school_semesters'] = ($accountDegree == null) ? null : $this->getSchoolSemesters($accountDegree[0]['school']['id']);
           $result[$i]['notifications'] = $this->getNotification($accountId);
+          $result[$i]['notification_settings'] = $this->getNotificationSettings($accountId);
           $i++;
         }
         return response()->json(array('data' => $result));
       }else{
         return $this->response();
       }
+    }
+
+    public function getNotificationSettings($accountId){
+      $result = NotificationSetting::where('account_id', '=', $accountId)->get();
+      return (sizeof($result) > 0) ? $result[0] : null;
     }
 
     public function getAccountWorks($accountId){
