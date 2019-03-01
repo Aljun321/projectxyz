@@ -16,10 +16,6 @@ class MessengerGroupController extends ClassWorxController
       $this->model = new MessengerGroup();
     }
 
-function __construct(){
-      $this->model = new MessengerGroup();
-    }
-
     public function create(Request $request){
       $data = $request->all();
 

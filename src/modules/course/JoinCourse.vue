@@ -20,14 +20,15 @@
           </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="submit()" v-if="closeFag == false">Request to Join</button>
-            <button type="button" class="btn btn-danger" v-else  data-dismiss="modal" aria-label="Close">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">Cancel</button>
+            <button type="button" class="btn btn-primary" @click="submit()">Request to Join</button>
         </div>
       </div>
     </div>
   </div>
 </template>
-
+<style scoped>
+</style>
 <script>
 import ROUTER from '../../router'
 import AUTH from '../../services/auth'
@@ -73,5 +74,4 @@ export default {
   }
 }
 </script>
-<style scoped>
-</style>
+

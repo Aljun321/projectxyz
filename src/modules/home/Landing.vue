@@ -2,11 +2,17 @@
 	<div class="body">
 		<landing-banner></landing-banner>
     <landing-snetwork></landing-snetwork>
+    <landing-bizmarketplace></landing-bizmarketplace>
     <landing-classroom></landing-classroom>
     <landing-organization></landing-organization>
 		<landing-features></landing-features>
 	</div>
 </template>
+<style scoped>
+.body{
+  margin: 0px;
+}
+</style>
 <script>
 import ROUTER from '../../router'
 import AUTH from '../../services/auth'
@@ -14,6 +20,7 @@ export default {
   components: {
     'landing-banner': require('modules/home/Landing/Banner.vue'),
     'landing-snetwork': require('modules/home/Landing/SocialNetwork.vue'),
+    'landing-bizmarketplace': require('modules/home/Landing/BizMarketplace.vue'),
     'landing-classroom': require('modules/home/Landing/Classroom.vue'),
     'landing-organization': require('modules/home/Landing/Organization.vue'),
     'landing-features': require('modules/home/Landing/Features.vue')
@@ -31,8 +38,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.body{
-	margin: 0px;
-}
-</style>

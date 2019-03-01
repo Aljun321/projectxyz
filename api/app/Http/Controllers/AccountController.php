@@ -13,8 +13,6 @@ use App\Semester;
 use App\School;
 use App\AccountWorkExperience;
 use App\Notification;
-use App\EnrolledAccount;
-use App\AttendanceAccount;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,6 +37,7 @@ class AccountController extends ClassWorxController
 
     public function create(Request $request){
      $request = $request->all();
+     $referralCode = $request['referral_code'];
      $dataAccount = array(
       'code'              => $this->generateCode(),
       'password'        => Hash::make($request['password']),
@@ -51,26 +50,26 @@ class AccountController extends ClassWorxController
      );
      $this->model = new Account();
      $this->insertDB($dataAccount);
-     if($this->response['data'] != null ){
-        // $dataSchoolAccount = array(
-        //   'account_id'  => $this->response['data'],
-        //   'school_id'   => $request['school_id']
-        // );
-        // $accountSchool = new AccountSchool();
-        // $accountSChoolResult = $accountSchool->insert($dataSchoolAccount);
-        $emailFlag = ($request['config']['IS_DEV'] == true) ? 'OFF' : 'ON';
-        $this->insertNotifications($this->response['data']);
-        if($request['account_type'] == 'STUDENT'){
-          $this->addTestCourse($this->response['data']);
-          $this->addAttendance($this->response['data']);
-        }else{
-          //
-        }
+     if($this->response['data'] > 0 ){
+        $accountId = $this->response['data'];
+        $this->createDetails($accountId);
+        app('App\Http\Controllers\EmailController')->verification($accountId);
+        if($referralCode != null){
+            app('App\Http\Controllers\InvitationController')->confirmReferral($referralCode);
+         }
         return $this->response();
      }else{
         return $this->response();
      }
     }
+
+    public function createDetails($accountId){
+      $info = new AccountInformation();
+      $info->account_id = $accountId;
+      $info->created_at = Carbon::now();
+      $info->save();
+    }
+    
     public function generateCode(){
       $code = 'A-'.substr(str_shuffle("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 126);
       $codeExist = Account::where('code', '=', $code)->get();
@@ -79,56 +78,6 @@ class AccountController extends ClassWorxController
       }else{
         return $code;
       }
-    }
-
-    public function addAttendance($accountId){
-      $model = new AttendanceAccount();
-      $model->attendance_id = 1;
-      $model->account_id = $accountId;
-      $model->remarks = null;
-      $model->status = 'PRESENT';
-      $model->created_at = Carbon::now();
-      $model->save();
-    }
-
-    public function addTestCourse($accountId){
-      $model = new EnrolledAccount();
-      $model->account_id = $accountId;
-      $model->course_id = 1;
-      $model->status = 1;
-      $model->declined_date = Carbon::now();
-      $model->created_at = Carbon::now();
-      $model->save();
-    }
-
-    public function insertNotifications($accountId){
-      $notif = new Notification();
-      $data = array(
-        'creator'     => null,
-        'account_id'  => $accountId,
-        'course_id'   => null,
-        'title'       => 'Update Personal Informations',
-        'description' => 'You need to update your personal informations before you can use the functions of Classworx.',
-        'payload'     => 'redirect',
-        'url'         => 'account_settings',
-        'parameter'   => null,
-        'status'      => 'pushed',
-        'created_at'  => Carbon::now()
-      );
-      $notif->insert($data);
-      $emailData = array(
-        'creator'     => null,
-        'account_id'  => $accountId,
-        'course_id'   => null,
-        'title'       => 'Email Verification',
-        'description' => 'Check your email address to verify your account',
-        'payload'     => 'api_call',
-        'url'         => 'accounts/verify',
-        'parameter'   => null,
-        'status'      => 'pushed',
-        'created_at'  => Carbon::now()
-      );
-      $notif->insert($emailData);
     }
 
     public function verify(Request $request){

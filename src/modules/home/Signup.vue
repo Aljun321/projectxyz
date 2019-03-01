@@ -9,8 +9,8 @@
           Register to <b class="text-primary">CLASS</b><b class="text-green">WORX</b>
         </span>
         <span class="options">
-          <button v-bind:class="{'btn-primary': type === 'student'}" class="btn btn-default" @click="type = 'student'" style="margin-right: 1%;">Register me as Student</button>
-          <button v-bind:class="{'btn-primary': type === 'teacher'}" class="btn btn-default" @click="type = 'teacher'" style="margin-left: 1%;">Register me as Teacher</button>
+          <button v-bind:class="{'btn-primary': type === 'STUDENT'}" class="btn btn-default" @click="type = 'STUDENT'" style="margin-right: 1%;">Register me as Student</button>
+          <button v-bind:class="{'btn-primary': type === 'TEACHER'}" class="btn btn-default" @click="type = 'TEACHER'" style="margin-left: 1%;">Register me as Teacher</button>
         </span>
         
         <div class="signup-holder">
@@ -126,22 +126,18 @@ import AUTH from '../../services/auth'
 import CONFIG from '../../config.js'
 export default {
   mounted(){
-    // this.getSchools()
   },
   data(){
     return {
-      code: this.$route.params.code,
       username: '',
-      email: this.$route.params.email,
+      email: null,
       password: '',
       cpassword: '',
-      type: 'student',
+      type: 'STUDENT',
       errorMessage: '',
       user: AUTH.user,
       tokenData: AUTH.tokenData,
-      flag: false,
-      schools: null,
-      schoolIndex: null
+      flag: false
     }
   },
   methods: {
@@ -153,7 +149,7 @@ export default {
         password: this.password,
         config: CONFIG,
         account_type: this.type,
-        referral_code: this.code
+        referral_code: null
       }
       if(this.flag === true){
         $('#loading').css({'display': 'block'})
@@ -173,8 +169,6 @@ export default {
               }
             }
           }
-          // this.redirect('/verification/' + this.email)
-          // this.login()
         })
       }
     },
@@ -197,7 +191,7 @@ export default {
     },
     login(){
       AUTH.authenticate(this.username, this.password, (response) => {
-        ROUTER.push('/dashboard')
+        ROUTER.push('/discussions')
       }, (response, status) => {
         this.errorMessage = (status === 401) ? 'Your username and password did not matched.' : 'Cannot log in? Contact us through email: support@classworx.co'
       })

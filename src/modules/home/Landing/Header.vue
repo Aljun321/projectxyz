@@ -13,7 +13,7 @@
         </span>
         <ul class="header-primary-menu">
           <li class="nav-item" v-on:click="redirect('/signup')"><a class="nav-link">Register</a></li>
-          <li class="nav-item" v-on:click="redirect('/login')"><a class="nav-link">Login</a></li>
+          <li class="nav-item" v-on:click="redirect('/login')"><a class="nav-link btn btn-primary" style="width: 120px;">Login</a></li>
         </ul>
       </span>
     </div>

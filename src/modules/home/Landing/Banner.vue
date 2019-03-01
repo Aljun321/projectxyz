@@ -6,6 +6,7 @@
       </span>
       <span class="description">
         <h4>CLASSWORX is an online management platform that improves the connectivity between students and teachers and it's easy to use.</h4>
+         <button class="btn btn-warning btn-banner" v-on:click="redirect('/signup')"> Get started today</button>
       </span>
     </div>
     <div class="image">
@@ -13,30 +14,25 @@
     </div>
 	</div>
 </template>
-<script>
-import ROUTER from '../../../router'
-import AUTH from '../../../services/auth'
-export default {
-  mounted(){
-  },
-  data(){
-    return {
-    }
-  },
-  methods: {
-    redirect(parameter){
-      ROUTER.push(parameter)
-    }
-  }
-}
-</script>
 <style scoped>
 .cw-banner{
-	width: 100%;
-	float: left;
-	height: 500px;
-	background: #23002c;
+  width: 100%;
+  float: left;
+  height: 500px;
+  background: #23002c;
 }
+
+.btn-banner{
+  padding-top: 0px !important;
+  padding: 50px;
+  margin-top: 25px;
+  font-size: 20px !important;
+  height: 50px !important;
+  line-height: 50px !important;
+  margin-left: 1%;
+  border-radius: 98px;
+}
+
 .text{
   width: 40%;
   float: left;
@@ -81,3 +77,20 @@ export default {
 }
 
 </style>
+<script>
+import ROUTER from '../../../router'
+import AUTH from '../../../services/auth'
+export default {
+  mounted(){
+  },
+  data(){
+    return {
+    }
+  },
+  methods: {
+    redirect(parameter){
+      ROUTER.push(parameter)
+    }
+  }
+}
+</script>
