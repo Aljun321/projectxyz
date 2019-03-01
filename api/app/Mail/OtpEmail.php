@@ -34,6 +34,6 @@ class OtpEmail extends Mailable
 
     public function build()
     {
-        return $this->from('support@idfactory.ph')->view('email.otpemail');
+        return $this->from('support@classworx.co')->view('email.otpemail');
     }
 }

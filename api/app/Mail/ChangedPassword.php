@@ -32,6 +32,6 @@ class ChangedPassword extends Mailable
 
     public function build()
     {
-        return $this->from('support@idfactory.ph')->view('email.changedpasswordnotif');
+        return $this->from('support@classworx.co')->view('email.changedpasswordnotif');
     }
 }

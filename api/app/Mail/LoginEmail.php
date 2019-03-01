@@ -32,6 +32,6 @@ class LoginEmail extends Mailable
 
     public function build()
     {
-        return $this->from('support@idfactory.ph')->view('email.loginemail');
+        return $this->from('support@classworx.co')->view('email.loginemail');
     }
 }

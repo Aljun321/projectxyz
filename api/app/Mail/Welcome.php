@@ -28,6 +28,6 @@ class Welcome extends Mailable
      */
     public function build()
     {
-        return $this->from('support@idfactory.ph')->view('email.welcome');
+        return $this->from('support@classworx.co')->view('email.welcome');
     }
 }

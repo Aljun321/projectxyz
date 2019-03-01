@@ -100,7 +100,7 @@
             If you did not make this change, please <a href="http://classworx.co/#/reset_password/{{$user->username}}/{{$user->code}}">reset</a> your password to secure your account and reply to this message to notify us.
         </span>
         <span class="footer">
-            <label>Copyright @IDFACTORY.PH 2018</label>
+            <label>Copyright @CLASWORX.CO 2018</label>
             <br>
             <label>3rd Floor, Bunzel Bldg., TechHub Area, University of San Carlos - Talamban Campus, Talamban, Cebu City, Philippines</label>
         </span>

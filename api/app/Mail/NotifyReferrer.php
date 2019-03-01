@@ -32,6 +32,6 @@ class NotifyReferrer extends Mailable
 
     public function build()
     {
-        return $this->from('support@idfactory.ph')->view('email.notifyreferrer');
+        return $this->from('support@classworx.co')->view('email.notifyreferrer');
     }
 }
