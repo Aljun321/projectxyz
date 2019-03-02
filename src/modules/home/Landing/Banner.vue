@@ -2,7 +2,7 @@
 	<div class="cw-banner">
     <div class="text text-white">
       <span class="title">
-        <h1>Built for Students and Teachers.</h1>
+        <h1>Experience Exclusivity</h1>
       </span>
       <span class="description">
         <h4>CLASSWORX is an online management platform that improves the connectivity between students and teachers and it's easy to use.</h4>
@@ -10,7 +10,7 @@
       </span>
     </div>
     <div class="image">
-      <img src="../../../assets/img/devices.png" style="margin-bottom: 5px;">
+      <img src="../../../assets/img/banner.png" style="margin-bottom: 5px;">
     </div>
 	</div>
 </template>
@@ -44,7 +44,7 @@
   float: left;
 }
 .title h1{
-  font-size: 60px;
+  font-size: 50px;
 }
 .text .description{
   margin-top: 25px;
@@ -53,11 +53,15 @@
   text-align: justify;
 }
 .image{
-  width: 40%;
-  margin-right: 10%;
+  width: 45%;
+  margin-right: 5%;
   float: left;
   margin-top: 50px;
   display: block;
+}
+
+.image img{
+  width: 100%;
 }
 
 @media screen and (max-width: 992px){
