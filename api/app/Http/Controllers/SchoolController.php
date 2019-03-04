@@ -27,4 +27,10 @@ class SchoolController extends ClassWorxController
         return $code;
       }
     }
+
+
+    public function retrieveById($id){
+      $result = School::where('id', '=', $id)->get();
+      return (sizeof($result) > 0) ? $result[0] : null;
+    }
 }

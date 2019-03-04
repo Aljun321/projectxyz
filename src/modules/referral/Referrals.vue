@@ -1,5 +1,8 @@
 <template>
-	<div class="holder">
+  <div class="holder">
+    <div class="alert alert-success">
+      Hi <b>{{user.username}}!</b> Invite your friends to ClassWorx to get a month of free subscription based on your current plan. If you are currently on trial account you will get the <b>basic</b> subscription plan reward.
+    </div>
     <div class="invitation">
       <div class="header text-primary">
         <b>Invite your friends to ID Factory</b>
@@ -43,16 +46,16 @@
     <div class="results" v-if="data === null">
       <empty :title="'Looks like you do not have referrals!'" :action="'Invite your friends now to get a month of free subscription.'"></empty>
     </div>
-	</div>
+  </div>
 </template>
 <style scoped>
-	.holder{  
+  .holder{  
     width: 98%;
     float: left;
     margin-right: 2%;
-	  margin-top: 25px;
-	  margin-bottom: 50px;
-	}
+    margin-top: 25px;
+    margin-bottom: 50px;
+  }
   .results{
     float: left;
     width: 68%;
@@ -108,7 +111,7 @@ export default {
       config: CONFIG,
       data: null,
       email: null,
-      message: 'I\'d like to invite you on ID Factory. They help me ease on providing ID\'s to my employees and It\'s very easy to use. Register now!',
+      message: 'I\'d like to invite you on ClassWorx. They help me for my class works and It\'s very easy to use. Register now!',
       successMessage: null,
       errorMessage: null
     }

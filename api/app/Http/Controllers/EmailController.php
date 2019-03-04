@@ -10,6 +10,7 @@ use App\Mail\Referral;
 use App\Mail\LoginEmail;
 use App\Mail\OtpEmail;
 use App\Mail\NotifyReferrer;
+use App\Mail\Receipt;
 use Illuminate\Http\Request;
 
 class EmailController extends ClassWorxController
@@ -79,6 +80,15 @@ class EmailController extends ClassWorxController
             $this->response['data'] = true;
         }
         return $this->response();
+    }
+
+    public function receipt($accountId, $data){
+        $user = $this->retrieveAccountDetails($accountId);
+        if($user != null && sizeof($data) > 0){
+            Mail::to($user['email'])->send(new Receipt($user, $data[0]));
+            return true;
+        }
+        return false;
     }
 
     public function trial(Request $request){

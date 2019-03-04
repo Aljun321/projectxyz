@@ -57,12 +57,8 @@
         </button>
       </span>
     </span>
-    <span class="header">Education Background <i class="fa fa-plus pull-right" style="line-height: 50px; padding-right: 20px;"></i></span>
-    <span class="content">
-    </span>
-    <span class="header">Work Experiences <i class="fa fa-plus pull-right" style="line-height: 50px; padding-right: 20px;"></i></span>
-    <span class="content" style="margin-bottom: 100px;">
-    </span>
+    <educational-background></educational-background>
+    <work-experiences></work-experiences>
   </div>
 </template>
 <style scoped>
@@ -155,6 +151,10 @@ export default {
       file: null,
       data: null
     }
+  },
+  components: {
+    'educational-background': require('modules/account/EducationalBackground.vue'),
+    'work-experiences': require('modules/account/WorkExperiences.vue')
   },
   methods: {
     addImage(){
