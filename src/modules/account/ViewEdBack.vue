@@ -13,8 +13,8 @@
           <label><i class="fas fa-id-card-alt"></i>{{item.school_student_code}}</label></span>
         <span class="item">
           <label><i class="fa fa-calendar"></i>{{item.month_started + ' ' + item.year_started + ' - '}}</label>
-          <label v-if="item.current_flag === false">{{'Current'}}</label>
-          <label v-if="item.current_flag === true">{{item.month_end + ' ' + item.year_end}}</label>
+          <label v-if="item.current_flag === true">Current</label>
+          <label v-if="item.current_flag === false">{{item.month_end + ' ' + item.year_end}}</label>
         </span>
       </span>
       <update-eb v-else :item="item" :schools="schools" :currentYear="currentYear" :months="months"></update-eb>
